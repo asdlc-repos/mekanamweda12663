@@ -1,0 +1,25 @@
+{
+  "overview": "A single-page web application architecture consisting of a frontend component that serves a static HTML page displaying 'Hello World'. The application uses a simple deployment model with one web-app component that directly serves content to users without backend dependencies.",
+  "requirements": [
+    "Display 'Hello World' text message to visitors",
+    "Page must load and display message immediately on access",
+    "Application must be responsive and work on any device screen size",
+    "Application must be compatible with all modern web browsers (Chrome, Firefox, Safari, Edge)",
+    "Application must be accessible via standard HTTP/HTTPS protocols",
+    "Application must include health check endpoint for monitoring"
+  ],
+  "components": [
+    {
+      "name": "hello-world-web",
+      "componentType": "web-app",
+      "language": "TypeScript / React",
+      "dependsOn": [],
+      "entrypoint": "deployment/web-application",
+      "buildpack": "docker",
+      "appPath": "/hello-world-web",
+      "openAPISpec": "openapi: 3.0.3\ninfo:\n  title: Hello World Web Application\n  version: 1.0.0\n  description: A simple web application that displays Hello World\npaths:\n  /health:\n    get:\n      summary: Health check endpoint\n      operationId: healthCheck\n      responses:\n        '200':\n          description: Service is healthy\n          content:\n            application/json:\n              schema:\n                type: object\n                properties:\n                  status:\n                    type: string\n                    example: ok",
+      "componentAgentInstructions": "Implement a simple React-based single-page application using TypeScript and React 18.x. Create a minimal React app with Create React App or Vite that displays 'Hello World' as the main content. The application should: 1) Use a clean, centered layout with the text 'Hello World' displayed prominently in the center of the viewport. 2) Include responsive CSS to ensure the text is readable on all device sizes (mobile, tablet, desktop). 3) Use a modern, sans-serif font with appropriate sizing (e.g., 48px for desktop, scaling down for mobile). 4) Include a /health endpoint served by the React development server or a simple Express server wrapper that returns {status: 'ok'} with 200 status code. 5) The Dockerfile should use a multi-stage build: first stage builds the React app with npm/yarn, second stage uses nginx:alpine to serve the static files. 6) Configure nginx to serve index.html for all routes and respond to /health with a 200 OK. 7) Expose port 80 in the container. 8) Ensure the application works in Chrome, Firefox, Safari, and Edge browsers. 9) Use semantic HTML5 elements. 10) Include basic meta tags for viewport and charset. 11) The background should be white or light colored, text should be dark for good contrast. 12) No external API calls or dependencies beyond the React framework itself. Keep the implementation minimal and focused solely on displaying the Hello World message."
+    }
+  ],
+  "sourceSpec": "spec-v1"
+}
